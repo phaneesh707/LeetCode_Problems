@@ -31,7 +31,7 @@ public:
         Node* pres = head;
         Node* head1 = NULL;
         Node* pres1=NULL;
-        Node* pres2=NULL;
+        // Node* pres2=NULL;
         //creating the linked list ,random of all pointing to null
         while(pres!=NULL){
             Node* temp = create_node(pres->val);
@@ -46,71 +46,41 @@ public:
             pres=pres->next;    
         }
         
+        
+        //calculating the index where random_pointer points to ;
         vector<int> s;
         int count=0;
-        pres2=head;
+        pres=head;
         pres1=head;
         while(pres1!=NULL){
             if(pres1->random==NULL)
                 s.push_back(-1);
             else{
-                while(pres2 != pres1->random){
+                while(pres != pres1->random){
                     count++;
-                    pres2=pres2->next;
+                    pres=pres->next;
                 }
                 s.push_back(count);
-                pres2=head;
+                pres=head;
             }
             count=0;
             pres1=pres1->next;
         }
-    
-        cout<<"\n"<<s.size();
+
+        //pointing the random to its resprective node calculted in vector s;
         pres1=head1;
-        pres2=head1;
+        pres=head1;
         for(auto it = s.begin();it!=s.end();it++){
             count=*it;
             if(*it!=-1){
                 while(count--)
-                    pres2=pres2->next;
-                pres1->random = pres2;
+                    pres=pres->next;
+                pres1->random = pres;
             }
             pres1=pres1->next;
-            pres2=head1;
+            pres=head1;
             
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //establishing random-links
-//         Node* pres2=head1;
-//         pres1=head1;
-//         pres=head;
-//         int key;
-//         while(pres1!=NULL){
-//             if(pres->random != NULL){
-//                 key=pres->random->val;
-//                 while(key!=pres2->val)
-//                     pres2=pres2->next;
-//                 pres1->random = pres2;
-                
-//             }
-            
-//             pres2=head1;
-//             pres1=pres1->next;
-//             pres=pres->next;
-                
-//         }
-        
+        }        
         return head1;
            
     }
