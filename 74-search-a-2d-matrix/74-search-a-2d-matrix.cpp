@@ -2,11 +2,11 @@ class Solution {
 public:
     
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int m = matrix.size();
+        // complexity - nlog(n)
         int n=matrix[0].size();
-        cout<<m<<n;
-        int flag;
-        for(int i=0;i<m;i++){
+        bool flag;
+        // traversing thru all array by checking its last ele and then binary src 
+        for(int i=0;i<matrix.size();i++){
             if(target<=matrix[i][n-1]){
                 int low = 0,high = n-1,mid;
                 while(low<=high){
