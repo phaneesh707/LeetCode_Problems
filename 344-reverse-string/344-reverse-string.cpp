@@ -13,25 +13,26 @@ public:
                 --last;
             }
         }else{
-            if(s.size()==2){
-                char h = s[0];
-                s[0]=s[1];
-                s[1]=h;
-            }else{
+            // if(s.size()==2){
+            //     char h = s[0];
+            //     s[0]=s[1];
+            //     s[1]=h;
+            // }else{
             
             while(start!=last){
+                if((start+1)==last)
+                    break;
                 char ch = *start;
                 *start= *last;
                 *last = ch;
                 ++start;
                 --last;
-                if((start+1)==last)
-                    break;
+                
                 }
                 char ch = *start;
                 *start= *last;
                 *last = ch;
-            }
+            // }
         }
         }
     };
