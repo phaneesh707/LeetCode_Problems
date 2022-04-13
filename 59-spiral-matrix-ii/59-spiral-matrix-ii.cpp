@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    //time complexity - O(n*n);
+    
     bool valid(int i,int j,int n){
         if(i>=0 && j>=0 && i<n && j<n)
             return true;
@@ -12,7 +15,7 @@ public:
         
         
         while(count<=n*n){
-            //going right
+            //going right and filling 
             while(valid(i,j,n) && !grid[i][j]){
                 grid[i][j] = count++;
                 j++;
@@ -20,24 +23,23 @@ public:
             if(!valid(i,j,n)|| grid[i][j])
                 j--;
             i++;
-            cout<<"i="<<i<<"j="<<j<<"\n";
             
             
             
-            //going down
+            //going down & filling
             while(valid(i,j,n) && !grid[i][j]){
                 grid[i][j] = count++;
                 i++;
             }
+            //backtrack to previous grid if its out of bound or its already filled
             if(!valid(i,j,n) || grid[i][j])
                 i--;
             j--;
-            cout<<"i="<<i<<"j="<<j<<"\n";
             if(count>n*n)
                 break;
             
             
-            //going left
+            //going left & filling
             while(valid(i,j,n) && !grid[i][j]){
                 grid[i][j] = count++;
                 j--;
@@ -47,14 +49,8 @@ public:
             i--;
             if(count>n*n)
                 break;
-            cout<<"i="<<i<<"j="<<j<<"\n";
-            if(count>n*n)
-                break;
             
-            
-            
-            
-            // going up
+            // going up and filling 
             while(valid(i,j,n) && !grid[i][j]){
                 grid[i][j] = count++;
                 i--;
@@ -62,19 +58,10 @@ public:
             if(!valid(i,j,n) || grid[i][j])
                 i++;
             j++;
-            cout<<"i="<<i<<"j="<<j<<"\n";
             if(count>n*n)
                 break;
-            
-            
-            for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                cout<<grid[i][j]<<" ";
-            }
-            cout<<"\n";
-        }
-            cout<<"\n";
-            
+           
+                        
         }
         
         return grid;
