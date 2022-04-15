@@ -8,11 +8,6 @@
  */
 
 
-
-
-
-
-
     //delete funciton 
     struct TreeNode* del_node(struct TreeNode *r,int ele)
 {
@@ -62,23 +57,12 @@
         inorder(root->right,low,high,item,k);
     }
     
-void inorde(struct TreeNode* root){
-        if(root == NULL)
-            return;
-        inorde(root->left);
-      
-            // item[k++]=root->val;
-        printf("%d ",root->val);
-        inorde(root->right);
-    }
-    
 
- 
 
 struct TreeNode* trimBST(struct TreeNode* root, int low, int high){
         int item[10000];
         int k =0 ;
-        int count = 0;
+        int count =0;
         for(int i=0;i<10000;i++)
             item[i]=-1;
     
@@ -89,6 +73,5 @@ struct TreeNode* trimBST(struct TreeNode* root, int low, int high){
             root = del_node(root,item[k]);
             k++;
         }
-        inorde(root);
         return root;
 }
