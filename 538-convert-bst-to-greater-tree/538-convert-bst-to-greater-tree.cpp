@@ -34,10 +34,8 @@ public:
     }
     
     TreeNode* convertBST(TreeNode* root) {
-        vector<int> node;
         int sum=0,prev=0;
         inorder(root,sum);
-        
         update(root,sum,prev);
         return root;
     }
