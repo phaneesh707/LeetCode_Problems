@@ -11,6 +11,8 @@
  */
 class Solution {
 public:
+    
+    //calculate sum
     void inorder(TreeNode* root,vector<int>& node){
         if(!root) return;
         inorder(root->left,node);
@@ -18,22 +20,27 @@ public:
         inorder(root->right,node);
     }
     
-    void update(TreeNode* root,vector<int> node){
+    void update(TreeNode* root,int& sum,int& prev){
         if(!root) return;
-        update(root->left,node);
-        int sum = 0;
-        for(int i=0;i<node.size();i++){
-            if(node[i]>root->val)
-                sum+=node[i];
-        }
-        root->val+=sum;
-        update(root->right,node);
+        update(root->left,sum,prev);
+        
+        
+        //prev holds previous elements sum ;
+        //sum holds the sum of all elem >= root->val;
+        prev = root->val;
+        root->val=sum;
+        sum-=prev;
+        update(root->right,sum,prev);
     }
     
     TreeNode* convertBST(TreeNode* root) {
         vector<int> node;
         inorder(root,node);
-        update(root,node);
+        int sum=0,prev=0;
+        for(int i=0;i<node.size();i++)
+            sum+=node[i];
+        
+        update(root,sum,prev);
         return root;
     }
 };
