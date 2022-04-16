@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    
-    //calculate sum
-    void inorder(TreeNode* root,vector<int>& node){
+    //time complexity - O(N)
+    //to calculate total sum
+    void inorder(TreeNode* root,int& sum){
         if(!root) return;
-        inorder(root->left,node);
-        node.push_back(root->val);
-        inorder(root->right,node);
+        inorder(root->left,sum);
+        sum+=root->val;
+        inorder(root->right,sum);
     }
     
     void update(TreeNode* root,int& sum,int& prev){
@@ -35,10 +35,8 @@ public:
     
     TreeNode* convertBST(TreeNode* root) {
         vector<int> node;
-        inorder(root,node);
         int sum=0,prev=0;
-        for(int i=0;i<node.size();i++)
-            sum+=node[i];
+        inorder(root,sum);
         
         update(root,sum,prev);
         return root;
