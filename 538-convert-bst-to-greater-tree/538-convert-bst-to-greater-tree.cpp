@@ -30,19 +30,10 @@ public:
         update(root->right,node);
     }
     
-    void ino(TreeNode* root){
-        if(!root) return;
-        ino(root->left);
-        // node.push_back(root->val);
-        cout<<root->val<<endl;
-        ino(root->right);
-    }
-    
     TreeNode* convertBST(TreeNode* root) {
         vector<int> node;
         inorder(root,node);
         update(root,node);
-        ino(root);
         return root;
     }
 };
