@@ -12,6 +12,9 @@
 class Solution {
 public:
     
+    //time complexity - O(N) - once traversal 
+    // space complexity - O(N) - for stack
+
     void inorder(TreeNode* root,stack<TreeNode*>& s){
         if(root == NULL) return;
         inorder(root->left,s);
@@ -23,7 +26,9 @@ public:
     TreeNode* increasingBST(TreeNode* root) {
         stack<TreeNode*> s;
         inorder(root,s);
-        // cout<<s.top()->val;
+        
+        //poping the last element and attaching it to the right of every node popped
+        
         TreeNode* pres;
         TreeNode* temp = s.top();
         temp->right = temp->left = NULL;
