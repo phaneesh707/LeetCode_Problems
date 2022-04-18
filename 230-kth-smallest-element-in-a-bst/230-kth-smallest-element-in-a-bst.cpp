@@ -16,11 +16,10 @@ public:
         if(root!=NULL){
             inorder(root->left,k,val,flag);
             flag++;
-            cout<<root->val<<flag<<endl;
             if(k==flag){
                 
                 val = root->val;
-                cout<<val<<"omin";
+                return;
             }
                 
             inorder(root->right,k,val,flag);
