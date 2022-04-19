@@ -12,25 +12,28 @@
 class Solution {
 public:
     int i=0;
-    void inorder(TreeNode* root,vector<int>& buffer,int flag){
+    void inorder(TreeNode* root,vector<int>& buffer){
         if(root!=NULL){
-            inorder(root->left,buffer,flag);
-            if(flag==0)
-                buffer.push_back(root->val);
-            else
-                 root->val = buffer[i++];
-            inorder(root->right,buffer,flag);
+            inorder(root->left,buffer);
+            buffer.push_back(root->val);
+            inorder(root->right,buffer);
         }
     }
     
-  
+    void modify_bst(TreeNode* root,vector<int>& buffer){
+        if(root!=NULL){
+            modify_bst(root->left,buffer);
+            root->val = buffer[i++];
+            modify_bst(root->right,buffer);
+        }
+    }
     
     
     void recoverTree(TreeNode* root) {
         vector<int> buffer;
-        inorder(root,buffer,0);
+        inorder(root,buffer);
         sort(buffer.begin(),buffer.end());
-        inorder(root,buffer,1);
+        modify_bst(root,buffer);
             
     }
 };
