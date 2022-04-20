@@ -12,7 +12,7 @@
 class BSTIterator {
 public:
     vector<int> bst;
-    int k = 0;
+    int k;
     void inorder(TreeNode* root,vector<int>& bst){
         if(root){
             inorder(root->left,bst);
@@ -22,27 +22,19 @@ public:
     }
     
     BSTIterator(TreeNode* root) {
+        k=0;
         inorder(root,bst);       
-        for(int i=0;i<bst.size();i++)
-            cout<<bst[i]<<" "<<endl;
     }
     
-    int next() {
-       
-        if(k<bst.size()){
-            cout<<" next if "<<bst[k]<<endl;
+    int next(){
+        if(k<bst.size())
             return bst[k++];
-        }
-        cout<<"end next"<<endl;
         return -1;
     }
     
     bool hasNext() {
-        if(k<bst.size()){
-            cout<<"hasNext if "<<k<<endl;
+        if(k<bst.size())
             return true;   
-        }
-        cout<<"hasNext else "<<k<<endl;
         return false;
     }
 };
