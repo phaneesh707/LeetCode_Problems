@@ -1,5 +1,7 @@
 class Solution {
 public:
+    //time - O(Nlon(N)) space O(N)
+    //finding the starting and end point of unsoreted array with 2 ptrs
     int findUnsortedSubarray(vector<int>& nums) {
         vector<int> dummy = nums;
         sort(dummy.begin(),dummy.end());
