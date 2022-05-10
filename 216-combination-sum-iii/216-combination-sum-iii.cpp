@@ -3,7 +3,7 @@ public:
     vector<vector<int>> v;
     
     void getSubs(vector<int> dig,vector<int> buffer,int k,int n,int index){
-        if(index == dig.size() && buffer.size()==k){
+        if(buffer.size()==k){
             int sum = 0;
             for(int i=0;i<buffer.size();i++)
                 sum+=buffer[i];
@@ -11,7 +11,7 @@ public:
             if(sum == n)
                 v.push_back(buffer);
             return;
-        }else if(index < dig.size()){
+        }else if(index < dig.size() && buffer.size()<k){
                 buffer.push_back(dig[index]);
                 getSubs(dig,buffer,k,n,index+1);
                 buffer.pop_back();
