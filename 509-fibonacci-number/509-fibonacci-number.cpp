@@ -1,16 +1,17 @@
 class Solution {
 public:
-    
-    int fibo(int n){
-        if(n==0)
-            return 0;
-        else if(n==1)
-            return 1;
-        else 
-            return fibo(n-1)+fibo(n-2);
-    }
-    
+
     int fib(int n) {
-        return fibo(n);
+        if(n<2)
+            return n;
+        else{
+            vector<int> fibo;
+            fibo.push_back(0);
+            fibo.push_back(1);
+            for(int i=2;i<=n;i++){
+                fibo.push_back(fibo[i-1]+fibo[i-2]);
+            }
+            return fibo[n];
+        }
     }
 };
