@@ -56,7 +56,7 @@
 class Solution {
 public:
     
-    //Time - O(N) N=size of cost array  space - O(N)
+    //Time - O(N) N=size of cost array  space - O(1)
     int minCostClimbingStairs(vector<int>& cost) {
 
         int n = cost.size();
