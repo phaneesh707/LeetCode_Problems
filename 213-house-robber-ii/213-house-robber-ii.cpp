@@ -1,10 +1,11 @@
 class Solution {
 public:
     
+    //Time - O(N)   space - O(N)
+    
+    //calculates the max sum of non adj elements 
     int robbing(vector<int> nums){
         int n = nums.size(),maxi;
-        
-
         vector<int> a(n,0);
         a[0] = nums[0];
         a[1] = max(nums[0],nums[1]);
@@ -15,7 +16,7 @@ public:
         return a[n-1];
     }
     
-    
+    //max amt can be found in either 0 to n-2 house or 1 to n-1 houses
     int rob(vector<int>& nums) {
         int n = nums.size();
         if(n==1)
