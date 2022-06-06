@@ -10,12 +10,14 @@ public:
         //     }
         // }
         
-        vector<int> profit(prices.size(),0);
+        
+        //for i th day to get max profit you had to buy it at min of 1 to i-1 th day
         int mini = prices[0];
         int maxi = 0;
+        int profit;
         for(int i=1;i<prices.size();i++){
-            profit[i]=prices[i]-mini;
-            maxi = max(profit[i],maxi);
+            profit=prices[i]-mini;
+            maxi = max(profit,maxi);
             mini = min(prices[i],mini);
         }
         return maxi;
