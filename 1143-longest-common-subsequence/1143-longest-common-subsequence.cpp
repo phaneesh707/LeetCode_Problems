@@ -56,11 +56,31 @@ public:
     }
     
     
+    int shiftingIndex(string s, string t,int m,int n){
+        vector<int> prev(n+1,0),pres(n+1,0);
+        
+        for(int idx1=1;idx1<=m;idx1++){
+            for(int idx2=1;idx2<=n;idx2++){
+                
+                if(s[idx1-1] == t[idx2-1])
+                    pres[idx2] = 1 + prev[idx2-1];
+                else
+                    pres[idx2] = max(prev[idx2],pres[idx2-1]);
+            }
+            prev = pres;
+        }
+        return prev[n];
+        
+    }
+    
+    
+    
     int longestCommonSubsequence(string text1, string text2) {
         int m = text1.size(),n = text2.size();
-        vector<vector<int>> dp(m,vector<int>(n,-1));
+        // vector<vector<int>> dp(m,vector<int>(n,-1));
         // return recur(text1,text2,m-1,n-1);   
         // return memo(text1,text2,m-1,n-1,dp);
-        return tabu(text1,text2,m,n);
+        // return tabu(text1,text2,m,n);
+        return shiftingIndex(text1,text2,m,n);
     }
 };
