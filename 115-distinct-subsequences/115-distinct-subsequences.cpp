@@ -89,10 +89,31 @@ public:
     }
     
     
+    int spaceOpti(string s, string t){
+        int n = s.size(),m = t.size();
+        vector<double> dp(m+1,0);
+        dp[0] = 1;
+        
+        
+        for(int idx1=1;idx1<=n;idx1++){
+            for(int idx2=m;idx2>=1;idx2--){
+                
+                if(s[idx1-1] == t[idx2-1])
+                    dp[idx2] =  dp[idx2-1] + dp[idx2];
+                else
+                    dp[idx2] =  dp[idx2];
+            }
+        }
+    
+        
+        return (int)dp[m];
+    }
+    
     int numDistinct(string s, string t) {
         int n = s.size(),m = t.size();
         // return recur(s,t,n-1,m-1);
-        return tabu(s,t);
+        // return tabu(s,t);
+        return spaceOpti(s,t);
     }
 };
 
