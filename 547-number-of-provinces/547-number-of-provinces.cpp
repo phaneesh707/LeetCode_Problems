@@ -10,13 +10,16 @@ public:
         }
     }
     
+    void bfs(vector<vector<int>>& adj,vector<int>& visited,int node){
+        
+    }
+    
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = size(isConnected),count = 0;
         vector<int> visited(n,0);
         for(int i=0;i<n;i++){
             if(!visited[i]){
                 count++;
-                cout<<i;
                 dfs(isConnected,visited,i);
             }
         }
