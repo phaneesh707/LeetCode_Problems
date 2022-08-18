@@ -57,12 +57,41 @@ public:
         
     }
     
+    
+    int spaceOpti(vector<int> a){
+        int n = size(a);
+        vector<vector<int>> pres(2, vector<int>(3,0));
+        vector<vector<int>> prev(2, vector<int>(3,0));
+        prev[0][1]=a[n-1];
+        prev[0][2]=a[n-1];
+            
+        for(int idx=n-2;idx>=0;idx--){
+            for(int buy=0;buy<2;buy++){
+                for(int count = 2;count>0;count--){
+                    int bought = 0,sold = 0, move = 0;
+                    if(buy==1)
+                        bought = -a[idx] + prev[0][count];
+                    else
+                        sold = a[idx] + prev[1][count-1];
+                    move = prev[buy][count];
+                    pres[buy][count] = max({bought,sold,move});
+                }
+                
+            }
+            prev = pres;
+        }
+        return prev[1][2];
+        
+    }
+    
+    
     int maxProfit(vector<int>& prices) {
         int n = size(prices);
-        vector<vector<vector<int>>> dp(n, vector<vector<int>>(2, vector<int>(3,-1)));
+        // vector<vector<vector<int>>> dp(n, vector<vector<int>>(2, vector<int>(3,-1)));
         // return recur(prices,0,1,2);
         // return memo(prices,0,1,2,dp);
-        return tabu(prices);
+        // return tabu(prices);
+        return spaceOpti(prices);
 
     }
 };
