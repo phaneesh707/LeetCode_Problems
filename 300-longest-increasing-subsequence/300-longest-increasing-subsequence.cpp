@@ -65,7 +65,26 @@ public:
         return dp[0][0];
     }
     
-
+    int spaceOpti(vector<int> a){
+        int n = size(a);
+        vector<int> ahead(n+1,0);
+        vector<int> pres(n+1,0);
+        
+        
+        
+        for(int idx = n-1;idx>=0;idx--){
+            for(int prev = n-1;prev>=-1;prev--){
+                int take = 0,notTake = 0;
+                notTake = ahead[prev+1];
+                if(prev == -1 || a[idx]>a[prev])
+                    take = 1 +ahead[idx+1];
+                
+                pres[prev+1] =  max(take,notTake);   
+            }
+            ahead = pres;
+        }
+        return ahead[0];
+    }
     
     
     int lengthOfLIS(vector<int>& nums) {
@@ -73,6 +92,7 @@ public:
         vector<vector<int>> dp(n,vector<int>(n+1,-1));
         // return recur1(nums,0,-1);
         // return memo(nums,0,-1,dp);
-        return tabu(nums);
+        // return tabu(nums);
+        return spaceOpti(nums);
     }
 };
