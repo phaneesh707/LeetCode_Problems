@@ -88,8 +88,8 @@ public:
     
     
     int lengthOfLIS(vector<int>& nums) {
-        int n = size(nums);
-        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+        // int n = size(nums);
+        // vector<vector<int>> dp(n,vector<int>(n+1,-1));
         // return recur1(nums,0,-1);
         // return memo(nums,0,-1,dp);
         // return tabu(nums);
