@@ -5,7 +5,7 @@ public:
         vector<int> pres(m+1,0),prev(m+1,0);
         for(int i=1;i<=n;i++){
             for(int j=1;j<=m;j++){
-                if(s[i] == p[j])
+                if(s[i-1] == p[j-1])
                     pres[j] = 1+prev[j-1];
                 else
                     pres[j] = max(prev[j],pres[j-1]);
@@ -41,7 +41,7 @@ public:
         vector<int> dp(n,1);
         for(int i=1;i<n;i++){
             for(int j=0;j<i;j++){
-                if(size(a[i])-size(a[j])==1 && cmp(a[i],a[j])){
+                if(size(a[i])-size(a[j])==1 && LCS(a[i],a[j])==size(a[j])){
                     dp[i] = max(dp[i],1+dp[j]);
                 }
                 
