@@ -1,54 +1,40 @@
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-       vector<int> cost_arr(n+1,INT_MAX);
-       unordered_map<int,vector<pair<int,int>>> m1;
+        vector<vector<int>> a(n+1,vector<int>(n+1,1e4)),res;
+        for(int i=0;i<size(times);i++){
+            int x=times[i][0],y=times[i][1];
+            a[x][y] = times[i][2];
+         }
+    
         
-       for(int i=0;i<times.size();i++){
-           int src = times[i][0];
-           int des = times[i][1];
-           int time = times[i][2];
-           m1[src].push_back({des,time});
-      }
-      cost_arr[k] = 0;  
-      priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q1;
-     
-      q1.push({k,0});
+        res = a;
+        for(int k=1;k<=n;k++){
+            for(int i=1;i<=n;i++){
+                for(int j=1;j<=n;j++){
+                    if(i!=j)
+                    res[i][j] = min(a[i][j],a[i][k]+a[k][j]);
+                }
+            }
+            a=res;
+        }
         
-      while(!q1.empty()){
-          pair<int,int> top = q1.top();
-          
-          q1.pop();
-          int src = top.first;
-          int cost = top.second;
-         
-          vector<pair<int,int>> v = m1[src];
-          for(int i=0;i<v.size();i++){
-              int node = v[i].first;
-              int total_cost = v[i].second + cost;
-              if(cost_arr[node]>total_cost){
-                 q1.push({node,total_cost}); 
-              }
-              cost_arr[node] = min(cost_arr[node],total_cost);
-             
-              
-                  
-          }
-          
-      }  
-       
-      int max_ans = INT_MIN;
-      
-      for(int i=1;i<cost_arr.size();i++){
         
-          max_ans = max(cost_arr[i],max_ans);
-      }
+        int maxi = -1;
+        for(int i=1;i<=n;i++){
+            if(k!=i && a[k][i]>=10000)
+                return -1;
+            if(a[k][i]<1000)
+                maxi = max(maxi,a[k][i]);
+        }
         
-      if(max_ans == INT_MAX) return -1;
-        
-      return max_ans;  
-        
-         
+        // for(int i=1;i<=n;i++){
+        //     for(int j=1;j<=n;j++){
+        //         cout<<a[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        return maxi;
         
     }
 };
