@@ -44,7 +44,6 @@ public:
             b[i] = a[i][0];
             
         pair<int,int> res = binarySrc1(b,target);
-        cout<<res.first<<res.second<<endl;
         if(binarySrc(a[res.first],target) || binarySrc(a[res.second],target))
             return true;
         return false;
