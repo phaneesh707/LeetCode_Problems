@@ -18,37 +18,44 @@ class Solution {
 public:
     Node* copyRandomList(Node* head) {
         if(head == NULL) return head;
-        Node* dummy = new Node(0);
         
-        Node *pres = head,*temp = dummy,*ptr1,*ptr2;
+        Node *pres = head,*temp;
+        // 1.insert the duplicate nodes
         while(pres){
-            Node* node = new Node(pres->val);
-            temp->next = node;
-            temp = node;
-            pres = pres->next;
-            
+            Node *node = new Node(pres->val);
+            node->next = pres->next;
+            pres->next = node;
+            pres = node->next;
         }
         
+        // 2. connect the random ptrs
         pres = head;
-        temp = dummy->next;
-        
         while(pres){
-            ptr1 = head;
-            ptr2 = dummy->next;
             if(pres->random!=NULL){
-                while(pres->random!=ptr1){
-                    ptr1 = ptr1->next;
-                    ptr2 = ptr2->next;
-                }
-                temp->random = ptr2;
-            }
-            temp = temp->next;
-            pres = pres->next;
-            
+                pres->next->random = pres->random->next;
+            }   
+            pres = pres->next->next;
         }
         
+        // 3.extract the originl and duplicate list;
+        Node* dummy = new Node(0);
+        pres = head;
+        temp = dummy;
+        temp->next = head->next;
+        temp = temp->next;
+        while(pres){
+            pres->next = pres->next->next;
+            pres = pres->next;
+            if(temp->next)
+                temp->next = temp->next->next;
+            temp = temp->next;
+    
+        }
         
         return dummy->next;
+        
+        
+        
         
     }
 };
