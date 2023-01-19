@@ -19,9 +19,16 @@ public:
         }
     }
     
+    int dfs2(TreeNode* root){
+        if(root == NULL) 
+            return 0;
+		return 1 + max(dfs2(root->left),dfs2(root->right));
+    }
+    
     int maxDepth(TreeNode* root) {
-        int maxi = 0;
-        dfs(root,1,maxi);
-        return maxi;
+        // int maxi = 0;
+        // dfs(root,1,maxi);
+        // return maxi;
+        return dfs2(root);
     }
 };
