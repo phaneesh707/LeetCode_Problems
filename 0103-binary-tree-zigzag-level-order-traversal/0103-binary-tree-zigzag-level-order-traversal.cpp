@@ -11,35 +11,40 @@
  */
 class Solution {
 public:
-    int height(TreeNode* root){
-        if(root == NULL) 
-            return 0;
-        return 1 + max(height(root->left),height(root->right));
-    }
     
     void bfs(TreeNode* root,vector<vector<int>>& res){
         if(root == NULL) return;
-        queue<pair<TreeNode*,int>> q;
-        q.push({root,0});
+        
+        bool flag = true;
+        queue<TreeNode*> q;
+        q.push(root);
+        
         while(!q.empty()){
-            pair<TreeNode*,int> temp = q.front();
-            res[temp.second].push_back(temp.first->val);
-            q.pop();
-            if(temp.first->left)
-                q.push({temp.first->left,temp.second+1});
-            if(temp.first->right)
-                q.push({temp.first->right,temp.second+1});
+            
+            int sz = q.size();
+            vector<int> a(sz);
+            for(int i=0;i<sz;i++){
+                TreeNode* temp = q.front();
+                q.pop();
+                
+                int idx = flag?i:sz-i-1;
+                a[idx] = temp->val;
+                
+                if(temp->left)
+                    q.push(temp->left);
+                if(temp->right)
+                    q.push(temp->right);
+                
+            }
+            flag = !flag;
+            res.push_back(a);
+            
         }
     }
     
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        int h = height(root);
-        vector<vector<int>> res(h);
+        vector<vector<int>> res;
         bfs(root,res);
-        for(int i=0;i<h;i++){
-            if(i%2==1)
-                reverse(res[i].begin(),res[i].end());
-        }
         return res;
     }
 };
